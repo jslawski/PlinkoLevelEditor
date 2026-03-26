@@ -21,7 +21,7 @@ public class LevelObjectComponent : MonoBehaviour
     public LevelObjectComponentData GetLevelObjectComponentData()
     {
         LevelObjectComponentData componentData = new LevelObjectComponentData();
-        componentData.compName = this.name;
+        componentData.compName = this.GetType().Name;
         componentData.values = this.GetComponentValues();
 
         return componentData;

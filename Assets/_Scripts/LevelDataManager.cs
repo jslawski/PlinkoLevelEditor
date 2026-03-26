@@ -1,5 +1,4 @@
 using System.IO;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class LevelDataManager : MonoBehaviour
@@ -11,6 +10,8 @@ public class LevelDataManager : MonoBehaviour
 
     private LevelData _levelData;
 
+    public bool creatorMode = true;
+
     private void Awake()
     {
         if (instance == null)
@@ -21,14 +22,15 @@ public class LevelDataManager : MonoBehaviour
 
     private void Start()
     {
-        this.LoadLevelData("TestLevel.json");
+        this.LoadLevelData("SavedLevel.json");
+        this.SaveLevelData();
     }
 
     public void SaveLevelData()
     {
         this._levelData = new LevelData();
 
-        LevelObject[] allLevelObjects = GetComponentsInChildren<LevelObject>();
+        LevelObject[] allLevelObjects = this._levelParentTransform.gameObject.GetComponentsInChildren<LevelObject>();
 
         for (int i = 0; i < allLevelObjects.Length; i++)
         {
@@ -42,7 +44,7 @@ public class LevelDataManager : MonoBehaviour
     { 
         string levelDataJson = JsonUtility.ToJson(this._levelData);
 
-        File.WriteAllText(Application.dataPath + "/testLevel.json", levelDataJson);
+        File.WriteAllText(Application.dataPath + "/SavedLevel.json", levelDataJson);
     }
 
     public void LoadLevelData(string levelFileName)

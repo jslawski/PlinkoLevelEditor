@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LevelObject: MonoBehaviour
 {
-    private string _prefabName;
+    protected string _prefabName;
 
-    private float _value;    
+    protected float _value;    
 
-    public void LoadLevelObject(LevelObjectData data)
+    public virtual void LoadLevelObject(LevelObjectData data)
     {
         this._prefabName = data.objName;
         this._value = data.value;

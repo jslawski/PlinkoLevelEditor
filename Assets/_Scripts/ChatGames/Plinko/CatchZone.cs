@@ -1,83 +1,91 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
-public class CatchZone : MonoBehaviour
+public class CatchZone : LevelObject
 {
-/*    
-[SerializeField]
-    private PlinkoLevel plinkoLevel;
+    private const string NEW_LEVEL_TEXT = "New Lvl";
+    private const int NEW_LEVEL_VALUE = 10;
+    private const int MID_VALUE = 5;
 
-    [SerializeField]
-    private int catchPoints;
-
-    [SerializeField]
-    private TextMeshProUGUI pointsText;
-
-    [SerializeField]
-    private AudioSource catchAudio;
+    private TextMeshProUGUI _pointsText;    
+    private AudioSource _audioSource;
 
     private void Awake()
     {
-        this.pointsText.text = catchPoints.ToString();
-
-        if (catchPoints == 10)
-        {
-            this.pointsText.text = "New Lvl";
-        }
+        this._pointsText = GetComponentInChildren<TextMeshProUGUI>();
+        this._audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void LoadLevelObject(LevelObjectData data)
     {
-        if (other.gameObject.tag == "cabbage")
-        {
-            CabbageChatter scorer = other.gameObject.GetComponent<CabbageChatter>();
-            this.AwardPoints(scorer);
-            CabbageManager.instance.RemoveCabbage(scorer.chatterName);
-        }
+        base.LoadLevelObject(data);
+
+        this.SetPointsText();
+        this.SetAudio();
     }
 
-    private void AwardPoints(CabbageChatter scorer)
-    {        
-        scorer.shootScore += catchPoints;
-
-        while (scorer.shootScore >= CabbageManager.instance.prestigeThreshold)
-        {
-            scorer.TriggerPrestige();
-        }
-
-        //CabbageManager.instance.chatterScoreHistory[scorer.chatterName.ToLower()] = scorer.shootScore;
-        //CabbageManager.instance.chatterPrestigeHistory[scorer.chatterName.ToLower()] = scorer.prestigeLevel;
-        LeaderboardManager.instance.QueueLeaderboardUpdate(scorer.chatterName, catchPoints);
-
-        if (catchPoints == 10)
-        {
-            this.catchAudio.clip = Resources.Load<AudioClip>("SoundEffects/plinkoLevelSwitchNew");
-            this.gameObject.GetComponent<BoxCollider>().enabled = false;
-            this.catchAudio.Play();
-            StartCoroutine(this.LoadNextLevel());
-        }
-        else if (catchPoints > 3)
-        {
-            this.catchAudio.clip = Resources.Load<AudioClip>("SoundEffects/plinkoBigCatchNew");
-            this.catchAudio.Play();
-        }
-        else if (catchPoints > 0)
-        {
-            this.catchAudio.clip = Resources.Load<AudioClip>("SoundEffects/plinkoSmallCatchNew");
-            this.catchAudio.Play();
-        }         
-    }
-
-    private IEnumerator LoadNextLevel()
+    private void SetPointsText()
     {
-        while (this.catchAudio.isPlaying)
+        this._pointsText.text = this._value.ToString();
+
+        if (this._value >= NEW_LEVEL_VALUE)
         {
-            yield return null;
+            this._pointsText.text = NEW_LEVEL_TEXT;
+        }
+    }
+
+    private void SetAudio()
+    {
+        if (this._value >= NEW_LEVEL_VALUE)
+        {
+            this._audioSource.clip = Resources.Load<AudioClip>("SoundEffects/PlinkoLevelSwitch");                                   
+        }
+        else if (this._value > MID_VALUE)
+        {
+            this._audioSource.clip = Resources.Load<AudioClip>("SoundEffects/PlinkoBigCatch");
+        }
+        else
+        {
+            this._audioSource.clip = Resources.Load<AudioClip>("SoundEffects/PlinkoSmallCatch");
+        }
+    }
+
+    public void PlayCatchAudio()
+    {
+        this._audioSource.Play();
+    }
+
+    public int GetPointsValue()
+    {
+        return Mathf.CeilToInt(this._value);
+    }
+
+    /*    
+
+        private void AwardPoints(CabbageChatter scorer)
+        {        
+            scorer.shootScore += catchPoints;
+
+            while (scorer.shootScore >= CabbageManager.instance.prestigeThreshold)
+            {
+                scorer.TriggerPrestige();
+            }
+
+            //CabbageManager.instance.chatterScoreHistory[scorer.chatterName.ToLower()] = scorer.shootScore;
+            //CabbageManager.instance.chatterPrestigeHistory[scorer.chatterName.ToLower()] = scorer.prestigeLevel;
+            LeaderboardManager.instance.QueueLeaderboardUpdate(scorer.chatterName, catchPoints);
+
+                    
         }
 
-        this.plinkoLevel.plinkoGame.LoadNewPlinkoLevel();
-    }
-    */
+        private IEnumerator LoadNextLevel()
+        {
+            while (this.catchAudio.isPlaying)
+            {
+                yield return null;
+            }
+
+            this.plinkoLevel.plinkoGame.LoadNewPlinkoLevel();
+        }
+        */
 }

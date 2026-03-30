@@ -83,9 +83,19 @@ public class LevelObject: MonoBehaviour
     private List<float> GetScaleData()
     {
         List<float> scaleData = new List<float>();
-        scaleData.Add(this.transform.localScale.x);
-        scaleData.Add(this.transform.localScale.y);
-        scaleData.Add(this.transform.localScale.z);
+
+        if (this._transformToScale == null)
+        {
+            scaleData.Add(this.transform.localScale.x);
+            scaleData.Add(this.transform.localScale.y);
+            scaleData.Add(this.transform.localScale.z);
+        }
+        else
+        {
+            scaleData.Add(this._transformToScale.localScale.x);
+            scaleData.Add(this._transformToScale.localScale.y);
+            scaleData.Add(this._transformToScale.localScale.z);
+        }
 
         return scaleData;
     }

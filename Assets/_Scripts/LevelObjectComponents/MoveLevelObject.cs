@@ -65,7 +65,7 @@ public class MoveLevelObject : LevelObjectComponent
         moveSequence.onComplete -= this.MoveToPosition2;
         moveSequence.onComplete += this.MoveToPosition2;
 
-        this._currentlyActiveSequence = moveSequence.Append(this.objectTransform.DOMove(this._position1, this._moveTime))
+        this._currentlyActiveSequence = moveSequence.Append(this.objectTransform.DOLocalMove(this._position1, this._moveTime))
         .AppendInterval(this._waitTime)
         .Play();
     }
@@ -78,7 +78,7 @@ public class MoveLevelObject : LevelObjectComponent
         moveSequence.onComplete -= this.MoveToPosition1;
         moveSequence.onComplete += this.MoveToPosition1;
 
-        this._currentlyActiveSequence = moveSequence.Append(this.objectTransform.DOMove(this._position2, this._moveTime))
+        this._currentlyActiveSequence = moveSequence.Append(this.objectTransform.DOLocalMove(this._position2, this._moveTime))
         .AppendInterval(this._waitTime)
         .Play();
     }

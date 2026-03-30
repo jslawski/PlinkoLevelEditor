@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelDataManager
   _levelParentTransform: {fileID: 1263558658869931655}
+  creatorMode: 1
 --- !u!4 &1774460646
 Transform:
   m_ObjectHideFlags: 0
@@ -309,9 +310,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1520140372130613508, guid: 38d089ed9d3ff09479b1dc43dd849ee4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603048177705414547, guid: 38d089ed9d3ff09479b1dc43dd849ee4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4114430768376796871, guid: 38d089ed9d3ff09479b1dc43dd849ee4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 4114430768376796871, guid: 38d089ed9d3ff09479b1dc43dd849ee4, type: 3}
       propertyPath: m_LocalPosition.y

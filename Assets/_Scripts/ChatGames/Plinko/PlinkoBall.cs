@@ -1,7 +1,14 @@
 using UnityEngine;
+using CharacterCustomizer;
 
 public class PlinkoBall : MonoBehaviour
 {
+    
+    public virtual void SetupPlinkoBall(CustomCharacter customCharacter)
+    {
+        customCharacter.LoadCharacterFromJSON(string.Empty);    
+    }
+
     protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "CatchZone")

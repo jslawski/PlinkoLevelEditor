@@ -3,33 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DropZone : MonoBehaviour
+public class DropZone : LevelObject
 {
-    public int dropIndex = 0;
+    [SerializeField]
+    private BoxCollider _collider;
 
     [SerializeField]
-    private BoxCollider collider;
+    private TextMeshProUGUI _commandText;
 
     [SerializeField]
-    private TextMeshProUGUI commandText;
+    private GameObject _plinkoBallPrefab;
 
-    private void Awake()
+
+    public override void LoadLevelObject(LevelObjectData data)
     {
-        this.commandText.text = "!" + dropIndex.ToString();
+        base.LoadLevelObject(data);
+        
+        this._commandText.text = "!" + this._value.ToString();
     }
 
-    public void DropCabbage(GameObject newCabbage)
+    public void DropBall()
     {
-        float minX = this.collider.transform.position.x - (this.collider.bounds.size.x / 2.0f);
-        float maxX = this.collider.transform.position.x + (this.collider.bounds.size.x / 2.0f);
-        float minY = this.collider.transform.position.y - (this.collider.bounds.size.y / 2.0f);
-        float maxY = this.collider.transform.position.y + (this.collider.bounds.size.y / 2.0f);
+        float minX = this._collider.transform.position.x - (this._collider.bounds.size.x / 2.0f);
+        float maxX = this._collider.transform.position.x + (this._collider.bounds.size.x / 2.0f);
+        float minY = this._collider.transform.position.y - (this._collider.bounds.size.y / 2.0f);
+        float maxY = this._collider.transform.position.y + (this._collider.bounds.size.y / 2.0f);
 
         float randX = Random.Range(minX, maxX);
         float randY = Random.Range(minY, maxY);
 
-        newCabbage.layer = LayerMask.NameToLayer("launchedCabbage");
-
-        newCabbage.transform.position = new Vector3(randX, randY, -0.1f);
+        Vector3 instantiationPosition = new Vector3(randX, randY, -0.1f);
+        GameObject ballInstance = Instantiate(this._plinkoBallPrefab, instantiationPosition, new Quaternion());
+        ballInstance.layer = LayerMask.NameToLayer("launchedCabbage");                
     }
 }

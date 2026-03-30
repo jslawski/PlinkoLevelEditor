@@ -2,6 +2,144 @@
 	"lvlObjects":
 	[
 		{
+			"objName": "DropZone",
+			"value": 1,
+			"position": 
+			[
+				-20.0,
+				20.0,
+				0.0
+			],
+			"rotation": 
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": 
+			[
+				2.0,
+				0.5,
+				1.0
+			],			
+			"components": []
+		},
+		{
+			"objName": "DropZone",
+			"value": 2,
+			"position": 
+			[
+				0.0,
+				20.0,
+				0.0
+			],
+			"rotation": 
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": 
+			[
+				2.0,
+				0.5,
+				1.0
+			],			
+			"components": []
+		},
+		{
+			"objName": "DropZone",
+			"value": 3,
+			"position": 
+			[
+				20.0,
+				20.0,
+				0.0
+			],
+			"rotation": 
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": 
+			[
+				2.0,
+				0.5,
+				1.0
+			],			
+			"components": []
+		},
+		{
+			"objName": "CatchZone",
+			"value": 5,
+			"position": 
+			[
+				-20.0,
+				-18.0,
+				0.0
+			],
+			"rotation": 
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": 
+			[
+				2.0,
+				0.5,
+				1.0
+			],			
+			"components": []
+		},
+		{
+			"objName": "CatchZone",
+			"value": 10,
+			"position": 
+			[
+				0.0,
+				-18.0,
+				0.0
+			],
+			"rotation": 
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": 
+			[
+				2.0,
+				0.5,
+				1.0
+			],			
+			"components": []
+		},
+		{
+			"objName": "CatchZone",
+			"value": 4,
+			"position": 
+			[
+				20.0,
+				-18.0,
+				0.0
+			],
+			"rotation": 
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": 
+			[
+				2.0,
+				0.5,
+				1.0
+			],			
+			"components": []
+		},
+		{
 			"objName": "4WheelL",
 			"value": 0,
 			"position": 

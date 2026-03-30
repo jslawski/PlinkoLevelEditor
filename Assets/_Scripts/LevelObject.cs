@@ -6,7 +6,10 @@ public class LevelObject: MonoBehaviour
 {
     protected string _prefabName;
 
-    protected float _value;    
+    protected float _value;
+
+    [SerializeField]
+    protected Transform _transformToScale;
 
     public virtual void LoadLevelObject(LevelObjectData data)
     {
@@ -14,8 +17,15 @@ public class LevelObject: MonoBehaviour
         this._value = data.value;
         this.transform.localPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
         this.transform.localRotation = Quaternion.Euler(data.rotation[0], data.rotation[1], data.rotation[2]);
-        this.transform.localScale = new Vector3(data.scale[0], data.scale[1], data.scale[2]);
 
+        if (this._transformToScale != null)
+        {
+            this._transformToScale.localScale = new Vector3(data.scale[0], data.scale[1], data.scale[2]);
+        }
+        else
+        {
+            this.transform.localScale = new Vector3(data.scale[0], data.scale[1], data.scale[2]);
+        }
         this.SetupComponents(data.components);
     }
 

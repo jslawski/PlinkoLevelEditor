@@ -15,7 +15,7 @@ public class PlinkoLevel : MonoBehaviour
 
         this.plinkoGame = GetComponentInParent<PlinkoGame>();
     }
-
+    /*
     public bool IsValidDropIndex(int dropIndex)
     {
         for (int i = 0; i < this.dropZones.Length; i++)
@@ -28,6 +28,7 @@ public class PlinkoLevel : MonoBehaviour
 
         return false;
     }
+    */
     /*
     public void ProcessDropCommand(CabbageChatter cabbage, int dropNum)
     {

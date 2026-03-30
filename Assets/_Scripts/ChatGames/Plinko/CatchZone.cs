@@ -59,33 +59,4 @@ public class CatchZone : LevelObject
     {
         return Mathf.CeilToInt(this._value);
     }
-
-    /*    
-
-        private void AwardPoints(CabbageChatter scorer)
-        {        
-            scorer.shootScore += catchPoints;
-
-            while (scorer.shootScore >= CabbageManager.instance.prestigeThreshold)
-            {
-                scorer.TriggerPrestige();
-            }
-
-            //CabbageManager.instance.chatterScoreHistory[scorer.chatterName.ToLower()] = scorer.shootScore;
-            //CabbageManager.instance.chatterPrestigeHistory[scorer.chatterName.ToLower()] = scorer.prestigeLevel;
-            LeaderboardManager.instance.QueueLeaderboardUpdate(scorer.chatterName, catchPoints);
-
-                    
-        }
-
-        private IEnumerator LoadNextLevel()
-        {
-            while (this.catchAudio.isPlaying)
-            {
-                yield return null;
-            }
-
-            this.plinkoLevel.plinkoGame.LoadNewPlinkoLevel();
-        }
-        */
 }

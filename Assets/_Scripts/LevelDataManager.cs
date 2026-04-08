@@ -22,7 +22,7 @@ public class LevelDataManager : MonoBehaviour
 
     private void Start()
     {
-        this.LoadLevelData("TestLevel.json");
+        //this.LoadLevelData("TestLevel.json");
         this.SaveLevelData();
     }
 

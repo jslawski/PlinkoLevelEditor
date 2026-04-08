@@ -13,8 +13,8 @@ public class PlinkoBall : MonoBehaviour
     {
         if (other.gameObject.tag == "CatchZone")
         {
-            this.HandleCatch(other.gameObject.GetComponent<CatchZone>());            
-        }
+            this.HandleCatch(other.gameObject.GetComponentInParent<CatchZone>());            
+        }        
     }
 
     protected virtual void HandleCatch(CatchZone catchZone)

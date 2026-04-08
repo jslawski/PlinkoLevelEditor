@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1569894682719777048}
   m_Layer: 16
   m_Name: BoxVisuals
-  m_TagString: Untagged
+  m_TagString: CatchZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 815892078978086925}
   m_Layer: 16
   m_Name: CatchZone
-  m_TagString: Untagged
+  m_TagString: CatchZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

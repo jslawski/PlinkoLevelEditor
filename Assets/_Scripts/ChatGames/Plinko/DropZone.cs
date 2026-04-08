@@ -14,7 +14,6 @@ public class DropZone : LevelObject
     [SerializeField]
     private GameObject _plinkoBallPrefab;
 
-
     public override void LoadLevelObject(LevelObjectData data)
     {
         base.LoadLevelObject(data);

@@ -11,6 +11,13 @@ public class LevelObject: MonoBehaviour
     [SerializeField]
     protected Transform _transformToScale;
 
+    [HideInInspector]
+    public Vector2 minBounds;
+    [HideInInspector]
+    public Vector2 maxBounds;
+
+    protected Collider[] _allColliders;
+
     public virtual void LoadLevelObject(LevelObjectData data)
     {
         this._prefabName = data.objName;
@@ -26,6 +33,7 @@ public class LevelObject: MonoBehaviour
         {
             this.transform.localScale = new Vector3(data.scale[0], data.scale[1], data.scale[2]);
         }
+
         this.SetupComponents(data.components);
     }
 
@@ -47,6 +55,39 @@ public class LevelObject: MonoBehaviour
         {
             allColliders[i].enabled = false;
         }
+    }
+
+    public void UpdateBounds()
+    {
+        Vector2 minCandidates = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+        Vector2 maxCandidates = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+    
+        Collider[] allColliders = GetComponentsInChildren<Collider>();
+
+        for (int i = 0; i < allColliders.Length; i++)
+        {
+            if (allColliders[i].bounds.min.x < minCandidates.x)
+            {
+                minCandidates.x = allColliders[i].bounds.min.x;
+            }
+            if (allColliders[i].bounds.min.y < minCandidates.y)
+            {
+                minCandidates.y = allColliders[i].bounds.min.y;
+            }
+            if (allColliders[i].bounds.max.x > maxCandidates.x)
+            {
+                maxCandidates.x = allColliders[i].bounds.max.x;
+            }
+            if (allColliders[i].bounds.max.y > maxCandidates.y)
+            {
+                maxCandidates.y = allColliders[i].bounds.max.y;
+            }
+        }
+
+        this.minBounds = minCandidates;
+        this.maxBounds = maxCandidates;
+
+        Debug.LogError("Min: " + this.minBounds + "\nMax: " + this.maxBounds);
     }
 
     public void StartComponents()

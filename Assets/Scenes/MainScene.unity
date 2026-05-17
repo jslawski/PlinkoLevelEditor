@@ -1097,6 +1097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbd8d47157804c4589e882598f0ec9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControlsManager
+  equippedLevelObjectPrefab: {fileID: 0}
+  equippedLevelObjectInstance: {fileID: 0}
 --- !u!4 &1339238729
 Transform:
   m_ObjectHideFlags: 0

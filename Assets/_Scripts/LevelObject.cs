@@ -29,6 +29,26 @@ public class LevelObject: MonoBehaviour
         this.SetupComponents(data.components);
     }
 
+    public void EnableCollision()
+    { 
+        Collider[] allColliders = GetComponentsInChildren<Collider>();
+
+        for (int i = 0; i < allColliders.Length; i++)
+        {
+            allColliders[i].enabled = true;
+        }
+    }
+
+    public void DisableCollision()
+    {
+        Collider[] allColliders = GetComponentsInChildren<Collider>();
+
+        for (int i = 0; i < allColliders.Length; i++)
+        {
+            allColliders[i].enabled = false;
+        }
+    }
+
     public void StartComponents()
     {
         LevelObjectComponent[] allComponents = GetComponents<LevelObjectComponent>();

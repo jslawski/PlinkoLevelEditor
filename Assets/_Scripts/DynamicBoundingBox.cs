@@ -22,6 +22,8 @@ public class DynamicBoundingBox : MonoBehaviour
 
     public void FixedUpdate()
     {
+        Debug.LogError("Derp");
+    
         if (Physics.CheckBox(this.gameObject.transform.position, this._collider.bounds.extents, this.gameObject.transform.rotation) == true)
         {
             this.isColliding = true;
@@ -31,6 +33,6 @@ public class DynamicBoundingBox : MonoBehaviour
         {
             this.isColliding = false;
             this._visualsSprite.color = Color.green;
-        }
+        }        
     }
 }

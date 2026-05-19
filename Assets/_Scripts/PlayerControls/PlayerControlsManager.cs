@@ -10,7 +10,7 @@ public class PlayerControlsManager : MonoBehaviour
     [HideInInspector]
     public GameObject equippedLevelObjectPrefab;
     [HideInInspector]
-    public GameObject equippedLevelObjectInstance;
+    public LevelObject equippedLevelObjectInstance;
 
     private PlayerControlState _currentState;
 
@@ -21,7 +21,7 @@ public class PlayerControlsManager : MonoBehaviour
             instance = this;
         }
 
-        this._currentState = new PlacementState();
+        
     }
 
     private void Update()
@@ -38,20 +38,30 @@ public class PlayerControlsManager : MonoBehaviour
 
         Destroy(this.equippedLevelObjectInstance);
 
-        this.equippedLevelObjectInstance = Instantiate(this.equippedLevelObjectPrefab, new Vector3(1000.0f, 1000.0f, 0.0f), new Quaternion());        
-        LevelObject levelObjectComponent = this.equippedLevelObjectInstance.GetComponent<LevelObject>();       
-        levelObjectComponent.UpdateBounds();
+        GameObject levelObject = Instantiate(this.equippedLevelObjectPrefab, new Vector3(1000.0f, 1000.0f, 0.0f), new Quaternion());        
+        this.equippedLevelObjectInstance = levelObject.GetComponent<LevelObject>();       
+        this.equippedLevelObjectInstance.UpdateBounds();
 
-        GameObject dynamicBoundingBoxInstance = Instantiate(this._dynamicBoundingBoxPrefab, this.equippedLevelObjectInstance.transform);
-        dynamicBoundingBoxInstance.GetComponent<DynamicBoundingBox>().Setup(levelObjectComponent.minBounds, levelObjectComponent.maxBounds);
+        this._currentState = new PlacementState();
+        this._currentState.EnterState();
 
-        levelObjectComponent.DisableCollision();        
+        //GameObject dynamicBoundingBoxInstance = Instantiate(this._dynamicBoundingBoxPrefab, this.equippedLevelObjectInstance.transform);
+        //dynamicBoundingBoxInstance.GetComponent<DynamicBoundingBox>().Setup(levelObjectComponent.minBounds, levelObjectComponent.maxBounds);
+
+        this.equippedLevelObjectInstance.DisableCollision();        
     }
 
-    public void PlaceEquippedObject(Vector3 placementPosition)
+    public LevelObject PlaceEquippedObject(Vector3 placementPosition)
     {
         GameObject placedObject = Instantiate(this.equippedLevelObjectPrefab, placementPosition, new Quaternion());
-        placedObject.GetComponent<LevelObject>().UpdateBounds();
+        LevelObject levelObjectComponent = placedObject.GetComponent<LevelObject>();
+
+        levelObjectComponent.UpdateBounds();
+        levelObjectComponent.EnablePhysicsCollision();
+
+        levelObjectComponent.DisableHighlights();
+
+        return levelObjectComponent;
     }
 
     //Handle all of the clicking, dragging, and placing stuff in this file

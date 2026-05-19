@@ -61,6 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f900910593416a4c86251f327d25830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelObject
+  _transformToScale: {fileID: 0}
+  minBounds: {x: 0, y: 0}
+  maxBounds: {x: 0, y: 0}
 --- !u!1001 &819114175394100935
 PrefabInstance:
   m_ObjectHideFlags: 0

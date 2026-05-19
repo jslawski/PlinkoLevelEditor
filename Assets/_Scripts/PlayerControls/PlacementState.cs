@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class PlacementState : PlayerControlState
 {
-    private GameObject _placeableObject;
-
     public override void EnterState()
     {
-        
     }
 
     public override void UpdateState()
@@ -18,13 +15,20 @@ public class PlacementState : PlayerControlState
 
         this.UpdateObjectPosition();
 
+        this.UpdateAllPegHighlights();
+
         //Continuously update equipped object state, and check to see if it can be placed in a location
 
         //If LMB and valid position, then place the object
         if (Input.GetMouseButtonDown(0) == true && this.IsValidPosition())
         {
-            PlayerControlsManager.instance.PlaceEquippedObject(this.GetMouseWorldPosition());
+            LevelObject objectInstance = PlayerControlsManager.instance.PlaceEquippedObject(this.GetMouseWorldPosition());                       
         }
+    }
+
+    private void UpdateAllPegHighlights()
+    {
+        PlayerControlsManager.instance.equippedLevelObjectInstance.UpdateHighlights();
     }
 
     public override void ExitState()
@@ -42,11 +46,13 @@ public class PlacementState : PlayerControlState
         Vector3 mousePositionScreenSpace = Input.mousePosition;
         mousePositionScreenSpace.z = Camera.main.nearClipPlane + 1;
 
-        return Camera.main.ScreenToWorldPoint(mousePositionScreenSpace);
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePositionScreenSpace);
+
+        return new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0.0f);
     }
 
     private bool IsValidPosition()
     {
-        return true;
+        return PlayerControlsManager.instance.equippedLevelObjectInstance.IsValidPosition();
     }
 }

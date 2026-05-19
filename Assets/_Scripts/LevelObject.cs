@@ -18,6 +18,13 @@ public class LevelObject: MonoBehaviour
 
     protected Collider[] _allColliders;
 
+    private PegHighlight[] _highlights;
+
+    private void Awake()
+    {
+        this._highlights = GetComponentsInChildren<PegHighlight>();
+    }
+
     public virtual void LoadLevelObject(LevelObjectData data)
     {
         this._prefabName = data.objName;
@@ -32,18 +39,30 @@ public class LevelObject: MonoBehaviour
         else
         {
             this.transform.localScale = new Vector3(data.scale[0], data.scale[1], data.scale[2]);
-        }
+        }        
 
         this.SetupComponents(data.components);
     }
 
-    public void EnableCollision()
+    public void EnablePhysicsCollision()
     { 
         Collider[] allColliders = GetComponentsInChildren<Collider>();
 
         for (int i = 0; i < allColliders.Length; i++)
-        {
+        {           
             allColliders[i].enabled = true;
+            allColliders[i].isTrigger = false;
+        }
+    }
+
+    public void EnableTriggerCollision()
+    {
+        Collider[] allColliders = GetComponentsInChildren<Collider>();
+
+        for (int i = 0; i < allColliders.Length; i++)
+        {
+            //allColliders[i].enabled = false;
+            allColliders[i].isTrigger = true;
         }
     }
 
@@ -53,7 +72,7 @@ public class LevelObject: MonoBehaviour
 
         for (int i = 0; i < allColliders.Length; i++)
         {
-            allColliders[i].enabled = false;
+            allColliders[i].enabled = false;            
         }
     }
 
@@ -118,6 +137,54 @@ public class LevelObject: MonoBehaviour
         levelObjectData.components = this.GetObjectComponentsData();
 
         return levelObjectData;
+    }
+
+    public void EnableHighlights()
+    {
+        if (this._highlights != null)
+        {
+            for (int i = 0; i < this._highlights.Length; i++)
+            {
+                this._highlights[i].EnableHighlight();
+            }
+        }
+    }
+
+    public void DisableHighlights()
+    {
+        if (this._highlights != null)
+        {
+            for (int i = 0; i < this._highlights.Length; i++)
+            {
+                this._highlights[i].DisableHighlight();
+            }
+        }
+    }
+
+    public void UpdateHighlights()
+    {
+        if (this._highlights != null)
+        {
+            for (int i = 0; i < this._highlights.Length; i++)
+            {
+                this._highlights[i].UpdateHighlight();
+            }
+        }
+    }
+
+    public bool IsValidPosition()
+    {
+        //Check validity for drop and catch zones
+    
+        for (int i = 0; i < this._highlights.Length; i++)
+        {
+            if (this._highlights[i].isValid == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private List<float> GetPositionData()

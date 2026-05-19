@@ -86,8 +86,6 @@ public class LevelObject: MonoBehaviour
 
         this.minBounds = minCandidates;
         this.maxBounds = maxCandidates;
-
-        Debug.LogError("Min: " + this.minBounds + "\nMax: " + this.maxBounds);
     }
 
     public void StartComponents()
